@@ -61,101 +61,39 @@ function countWords(n) {
   return ar(n) + (n <= 10 ? ' أعمال' : ' عملًا');
 }
 function tint(hex, k) { /* mix a colour with the page white */
-  var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255, W = [255, 251, 243];
+  var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255, W = [255, 253, 249];
   function m(c, w) { return Math.round(c * (1 - k) + w * k); }
   return 'rgb(' + m(r, W[0]) + ',' + m(g, W[1]) + ',' + m(b, W[2]) + ')';
 }
 
-/* ================= ornaments (arabesque) ================= */
+/* ================= quiet line work: emblem, flourish, page rules, faded drawings ================= */
 function f2(x) { return Math.round(x * 100) / 100; }
-function pts(cx, cy, R, r, n, rot) {
-  var a = [], k = n * 2, i, t, rad;
-  rot = (rot === undefined) ? -Math.PI / 2 : rot;
-  for (i = 0; i < k; i++) { rad = (i % 2 === 0) ? R : r; t = rot + Math.PI * i / n; a.push(f2(cx + rad * Math.cos(t)) + ',' + f2(cy + rad * Math.sin(t))); }
-  return a.join(' ');
-}
-function poly(points, attrs) { return '<polygon points="' + points + '" ' + (attrs || '') + '/>'; }
-var GOLD = '#C9A24E', GOLD_DK = '#8A6820', GF = 'url(#gGold)';
+var GOLD = '#1E1E20';
 
-function tileSVG(stroke, sw) {
-  var s = '<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><g fill="none" stroke="' + stroke + '" stroke-width="' + sw + '" stroke-linejoin="round">';
-  [[0, 0], [80, 0], [0, 80], [80, 80], [40, 40]].forEach(function (c) {
-    s += poly(pts(c[0], c[1], 27, 13.5, 8)) + '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="5"/>';
-  });
-  [[40, 0], [0, 40], [80, 40], [40, 80]].forEach(function (c) { s += poly(pts(c[0], c[1], 8, 8, 2, -Math.PI / 2)); });
-  return s + '</g></svg>';
-}
-function bandSVG() {
-  return '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 30 10"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3E0A4"/><stop offset=".5" stop-color="#C9A24E"/><stop offset="1" stop-color="#9B7A2C"/></linearGradient></defs>' +
-    '<path d="M0 .6H30M0 9.4H30" stroke="#C9A24E" stroke-width=".7" fill="none"/>' +
-    '<path d="M15 1.4L19.6 5 15 8.6 10.4 5z" fill="url(#g)"/><path d="M4 5h4M22 5h4" stroke="#C9A24E" stroke-width=".7"/><circle cx="1.2" cy="5" r="1" fill="#C9A24E"/><circle cx="28.8" cy="5" r="1" fill="#C9A24E"/></svg>';
-}
-function setPatterns() {
-  var st = document.documentElement.style;
-  function uri(svg) { return 'url("data:image/svg+xml,' + encodeURIComponent(svg) + '")'; }
-  st.setProperty('--pat-star', uri(tileSVG('rgba(43,47,76,.11)', 0.8)));
-  st.setProperty('--pat-star-gold', uri(tileSVG('rgba(224,190,100,.6)', 0.7)));
-  st.setProperty('--band', uri(bandSVG()));
-}
+
+/* the numbered ring (periods) or, without a number, the small brush-and-book emblem */
 function sealSVG(label) {
-  var inner = label
-    ? '<text x="50" y="50" dy=".36em" text-anchor="middle" font-family="Reem Kufi,IBM Plex Sans Arabic,sans-serif" font-weight="600" font-size="' + (String(label).length > 2 ? 22 : 32) + '" fill="#F6E2A4">' + label + '</text>'
-    : poly(pts(50, 50, 17, 8, 8), 'fill="#F6E2A4"');
+  if (!label) return '';
   return '<svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">' +
-    poly(pts(50, 50, 49, 42, 16), 'fill="' + GF + '" stroke="' + GOLD_DK + '" stroke-width=".5"') +
-    '<circle cx="50" cy="50" r="34" fill="#2B2F4C"/><circle cx="50" cy="50" r="31" fill="none" stroke="#F0DA9B" stroke-width=".7"/>' +
-    poly(pts(50, 50, 28, 19, 8), 'fill="none" stroke="#F0DA9B" stroke-width=".45" opacity=".55"') + inner + '</svg>';
+    '<circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1.6"/>' +
+    '<circle cx="50" cy="50" r="41" fill="none" stroke="currentColor" stroke-width=".6" opacity=".6"/>' +
+    '<text x="50" y="50" dy=".36em" text-anchor="middle" font-family="Noto Kufi Arabic,IBM Plex Sans Arabic,sans-serif" font-weight="500" font-size="' + (String(label).length > 2 ? 30 : 42) + '" fill="#1E1E20">' + label + '</text></svg>';
 }
+/* a single tapered brush stroke instead of an ornamental divider */
 function dividerSVG() {
-  return '<svg class="orn" viewBox="0 0 300 26" aria-hidden="true" focusable="false">' +
-    '<path d="M14 13H116M184 13H286" stroke="' + GOLD + '" stroke-width="1" fill="none"/>' +
-    '<path d="M2 13l6-4 6 4-6 4zM286 13l6-4 6 4-6 4zM122 13l5-3.5 5 3.5-5 3.5zM168 13l5-3.5 5 3.5-5 3.5z" fill="' + GF + '"/>' +
-    poly(pts(150, 13, 12, 6, 8), 'fill="' + GF + '" stroke="' + GOLD_DK + '" stroke-width=".4"') + '<circle cx="150" cy="13" r="3" fill="#FFFBF3"/></svg>';
+  return '<svg class="orn" viewBox="0 0 300 20" aria-hidden="true" focusable="false"><rect x="0" y="9.3" width="300" height="1.4" fill="url(#gHair)"/></svg>';
 }
 function ornEl() { var d = document.createElement('div'); d.innerHTML = dividerSVG(); return d.firstChild; }
-function miniStar(sz) { return '<svg viewBox="-6 -6 12 12" aria-hidden="true" focusable="false">' + poly(pts(0, 0, 5.5, 2.8, 8), 'fill="' + GF + '"') + '</svg>'; }
+function miniStar() { return '<svg viewBox="-6 -6 12 12" aria-hidden="true" focusable="false"><circle r="2.4" fill="' + GOLD + '"/></svg>'; }
+/* page rule: one fine gold line and a finer inner one */
 function frameSVG() {
-  var s = '<svg viewBox="0 0 93.6 125.6" preserveAspectRatio="none" aria-hidden="true" focusable="false">' +
-    '<rect x=".4" y=".4" width="92.8" height="124.8" fill="none" stroke="' + GOLD + '" stroke-width=".5"/>' +
-    '<rect x="2.2" y="2.2" width="89.2" height="121.2" fill="none" stroke="#2B2F4C" stroke-opacity=".3" stroke-width=".25"/>';
-  [[0.4, 0.4], [93.2, 0.4], [0.4, 125.2], [93.2, 125.2]].forEach(function (c) { s += poly(pts(c[0], c[1], 3.1, 1.6, 8), 'fill="' + GF + '" stroke="' + GOLD_DK + '" stroke-width=".15"'); });
-  [[46.8, 0.4], [46.8, 125.2], [0.4, 62.8], [93.2, 62.8]].forEach(function (c) { s += poly(pts(c[0], c[1], 1.7, 1.7, 2, -Math.PI / 2), 'fill="' + GF + '"'); });
-  return s + '</svg>';
+  return '<svg viewBox="0 0 93.6 125.6" preserveAspectRatio="none" aria-hidden="true" focusable="false">' +
+    '<rect x=".4" y=".4" width="92.8" height="124.8" fill="none" stroke="' + GOLD + '" stroke-width=".4" stroke-opacity=".8"/>' +
+    '<rect x="1.9" y="1.9" width="89.8" height="121.8" fill="none" stroke="#1E1E20" stroke-opacity=".16" stroke-width=".18"/></svg>';
 }
-function rosetteSVG() {
-  return '<svg viewBox="-50 -50 100 100" aria-hidden="true" focusable="false">' +
-    '<circle r="48.5" fill="none" stroke="' + GOLD + '" stroke-width=".6"/>' +
-    poly(pts(0, 0, 46, 38, 16), 'fill="none" stroke="' + GOLD + '" stroke-width=".7"') +
-    poly(pts(0, 0, 38, 28, 16, -Math.PI / 2 + Math.PI / 16), 'fill="' + GF + '" fill-opacity=".2" stroke="#B8903A" stroke-width=".5"') +
-    poly(pts(0, 0, 30, 17, 8), 'fill="#2B2F4C" fill-opacity=".93"') +
-    poly(pts(0, 0, 26, 15, 8, -Math.PI / 2 + Math.PI / 8), 'fill="none" stroke="#F0DA9B" stroke-width=".5"') +
-    '<circle r="10" fill="' + GF + '"/><circle r="6.5" fill="#2B2F4C"/>' + poly(pts(0, 0, 5, 2.4, 8), 'fill="#F6E2A4"') + '</svg>';
-}
+/* cover and back cover: two fine rules */
 function coverToolSVG() {
-  var s = '<svg viewBox="0 0 100 132" aria-hidden="true" focusable="false"><g fill="none" stroke="' + GF + '">' +
-    '<rect x="4" y="4" width="92" height="124" stroke-width=".8"/><rect x="6.6" y="6.6" width="86.8" height="118.8" stroke-width=".3"/>' +
-    '<circle cx="50" cy="54" r="38.5" stroke-width=".55"/><circle cx="50" cy="54" r="36.5" stroke-width=".25"/>' +
-    poly(pts(50, 54, 35.5, 30, 16), 'stroke-width=".4"') +
-    poly(pts(50, 54, 30, 17, 8, -Math.PI / 2 + Math.PI / 8), 'stroke-width=".25" stroke-opacity=".7"') + '</g>';
-  [[11, 11], [89, 11], [11, 121], [89, 121]].forEach(function (c) { s += poly(pts(c[0], c[1], 5.4, 2.7, 8), 'fill="' + GF + '"') + '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="1.3" fill="#2B2F4C"/>'; });
-  s += '<g fill="' + GF + '">' + poly(pts(50, 4, 2.6, 2.6, 2, -Math.PI / 2)) + poly(pts(50, 128, 2.6, 2.6, 2, -Math.PI / 2)) + poly(pts(4, 66, 2.6, 2.6, 2, -Math.PI / 2)) + poly(pts(96, 66, 2.6, 2.6, 2, -Math.PI / 2)) + '</g>';
-  s += '<g stroke="' + GOLD + '" stroke-width=".4" fill="none"><path d="M24 107H44M56 107H76"/></g>' + poly(pts(50, 107, 4.2, 2.1, 8), 'fill="' + GF + '"');
-  return s + '</svg>';
-}
-function ringSVG() {
-  var g = '', k;
-  for (k = 0; k < 8; k++) g += '<g transform="rotate(' + (k * 45 + 22.5) + ') translate(0,-183.5)">' + poly(pts(0, 0, 7, 3.4, 8), 'fill="' + GF + '"') + '</g>';
-  return '<svg viewBox="-200 -200 400 400" aria-hidden="true" focusable="false">' +
-    '<circle r="197" fill="none" stroke="' + GOLD + '" stroke-width=".9"/><circle r="190" fill="none" stroke="' + GOLD + '" stroke-width=".4" stroke-opacity=".7"/>' +
-    poly(pts(0, 0, 177, 160, 24), 'fill="none" stroke="' + GOLD + '" stroke-width=".5" stroke-opacity=".7"') +
-    poly(pts(0, 0, 150, 138, 16, -Math.PI / 2 + Math.PI / 16), 'fill="none" stroke="' + GOLD + '" stroke-width=".45" stroke-opacity=".55"') + g + '</svg>';
-}
-function archFrameSVG() {
-  var A = 'M3,474 L3,191 C3,86 107,38 179,3 C251,38 355,86 355,191 L355,474 Z';
-  var B = 'M-4,481 L-4,189 C-4,80 106,30 179,-4 C252,30 362,80 362,189 L362,481 Z';
-  return '<svg viewBox="0 0 358 477" preserveAspectRatio="none" aria-hidden="true" focusable="false">' +
-    '<path d="' + A + '" fill="none" stroke="' + GF + '" stroke-width="2.6" vector-effect="non-scaling-stroke"/>' +
-    '<path d="' + B + '" fill="none" stroke="' + GOLD + '" stroke-width="1" stroke-opacity=".8" vector-effect="non-scaling-stroke"/></svg>';
+  return '<svg viewBox="0 0 100 132" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor"><rect x="5" y="5" width="90" height="122" stroke-width=".35" stroke-opacity=".7"/><rect x="7.4" y="7.4" width="85.2" height="117.2" stroke-width=".15" stroke-opacity=".4"/></g></svg>';
 }
 
 /* ================= sound ================= */
@@ -231,8 +169,9 @@ function pageCover() {
       return [
         ico(coverToolSVG(), 'tool'),
         h('div', { class: 'ttx' }, [
-          h('div', { class: 't1 display' }, lines.map(function (w) { return h('span', { class: 'goldtext', text: w, style: 'display:block' }); })),
-          h('div', { class: 't2 callig goldtext', text: 'كلود عبيد' })
+          h('div', { class: 't1' }, lines.map(function (w) { return h('span', { text: w }); })),
+          h('div', { class: 'crule' }),
+          h('div', { class: 't2 ser', text: 'كلود عبيد' })
         ]),
         h('div', { class: 'sub', text: 'لوحات وحكايات من مراحل العمر' }),
         h('div', { class: 'opencue', text: 'اضغط على الزاوية أو اسحب لتقليب الصفحة' })
@@ -241,19 +180,18 @@ function pageCover() {
   };
 }
 function pageBack() {
-  return { cls: 'cover', ch: -1, kind: 'back', build: function () { return [ico(coverToolSVG(), 'tool'), h('div', { class: 'ttx' }, [ico(sealSVG(''), 'seal', 'div')])]; } };
+  return { cls: 'cover', ch: -1, kind: 'back', build: function () { return [ico(coverToolSVG(), 'tool'), h('div', { class: 'ttx' }, [h('div', { class: 't2 ser', text: 'كلود عبيد' })])]; } };
 }
 function cartSVG() {
   return '<svg viewBox="0 0 60 80" preserveAspectRatio="none" aria-hidden="true" focusable="false">' +
-    '<path d="M2,78 L2,34 C2,18 20,8 30,2 C40,8 58,18 58,34 L58,78 Z" fill="#FFFBF3" fill-opacity=".94" stroke="' + GOLD + '" stroke-width=".7" vector-effect="non-scaling-stroke"/>' +
-    '<path d="M5,75 L5,35 C5,21 21,11.5 30,6.2 C39,11.5 55,21 55,35 L55,75 Z" fill="none" stroke="' + GOLD + '" stroke-width=".35" vector-effect="non-scaling-stroke"/>' +
-    poly(pts(30, 2, 2.6, 1.3, 8), 'fill="' + GF + '"') + poly(pts(30, 78, 2.6, 1.3, 8), 'fill="' + GF + '"') + '</svg>';
+    '<rect x="1.5" y="1.5" width="57" height="77" rx="2" fill="#FFFDF9" fill-opacity=".94" stroke="' + GOLD + '" stroke-width=".7" vector-effect="non-scaling-stroke"/>' +
+    '<rect x="4.5" y="4.5" width="51" height="71" rx="1" fill="none" stroke="' + GOLD + '" stroke-width=".35" vector-effect="non-scaling-stroke"/></svg>';
 }
 function pageEndpaper() {
   return {
     cls: 'endpaper', ch: -1, kind: 'endpaper',
     build: function () {
-      return [h('div', { class: 'cart' }, [h('div', { class: 'cbox' }, [ico(cartSVG(), 'cbg'), h('div', { class: 'cin' }, [h('div', { class: 'callig', text: 'كلود عبيد' }), ornEl(), h('small', { text: 'لوحاتٌ وحكايات' })])])])];
+      return [h('div', { class: 'cart' }, [h('div', { class: 'cbox' }, [ico(cartSVG(), 'cbg'), h('div', { class: 'cin' }, [h('div', { class: 'ser', text: 'كلود عبيد' }), ornEl(), h('small', { text: 'لوحاتٌ وحكايات' })])])])];
     }
   };
 }
@@ -283,7 +221,7 @@ function pageFill(k) {
   return {
     cls: 'fillpg', ch: -1, kind: 'fill',
     build: function () {
-      return [ico(frameSVG(), 'pframe'), h('div', { class: 'pgwrap' }, [ico(rosetteSVG(), 'big'), h('div', { class: 'callig', text: PHRASES[k % PHRASES.length] })])];
+      return [ico(frameSVG(), 'pframe'), h('div', { class: 'pgwrap' }, [h('div', { class: 'qrule' }), h('div', { class: 'ser', text: PHRASES[k % PHRASES.length] }), h('div', { class: 'qrule' })])];
     }
   };
 }
@@ -292,7 +230,7 @@ function pageEnd() {
     cls: 'endpg', ch: -1, kind: 'end',
     build: function () {
       return [ico(frameSVG(), 'pframe'), h('div', { class: 'pgwrap' }, [
-        h('div', { class: 'callig', text: 'وللحكاية بقية' }), ornEl(),
+        h('div', { class: 'ser', text: 'وللحكاية بقية' }), ornEl(),
         h('p', { text: 'شكرًا لأنك قلبت صفحات هذه الحكاية.' }),
         h('button', { type: 'button', class: 'btn2', text: 'العودة إلى الفهرس', on: { click: function () { turn(pageToPos(2)); } } })
       ])];
@@ -304,9 +242,8 @@ function pageTitle(ci) {
   return {
     cls: 'titlepg', ch: ci, kind: 'title', style: { '--tint': tint(c.bg, 0.45) },
     build: function () {
-      var first = (c.title.split(/\s+/)[0] || c.title), fs = Math.min(42, 250 / Math.max(first.length, 1));
+      
       var kids = [
-        h('div', { class: 'wm', 'aria-hidden': 'true', text: first, style: 'font-size:' + f2(fs) + 'cqw' }),
         ico(sealSVG(ar(ci + 1)), 'seal'),
         h('h3', { class: 'display', text: c.title }),
         h('div', { class: 'yrs', text: c.years || ordinal(ci) }),
@@ -445,6 +382,7 @@ function updateUI() {
   var st = $('#stage'), vp = visiblePages(), max = maxPos(), single = B.mode === 'single';
   st.classList.toggle('at-start', !single && B.pos === 0);
   st.classList.toggle('at-end', !single && B.pos === B.n);
+  st.classList.toggle('on-cover', B.pos === 0);
   $$('.face', $('#b3d')).forEach(function (fe) {
     var vis = vp.indexOf(+fe.getAttribute('data-p')) !== -1;
     fe.inert = !vis; fe.setAttribute('aria-hidden', vis ? 'false' : 'true');
@@ -633,9 +571,9 @@ function renderWords() {
   var any = D.books.length + D.articles.length + D.videos.length;
   if (!any && !ed) { root.hidden = true; return; }
   root.hidden = false;
+  
   var wrap = h('div', { class: 'wrap' });
   wrap.appendChild(h('header', { class: 'chead rv' }, [
-    ico(sealSVG(''), 'seal'),
     h('div', { class: 'ttl' }, [h('h2', { class: 'display', text: 'كلماتها' }), h('p', { class: 'intro story', text: 'لوحاتها تتكلم، وهي أيضًا تكتب: كتب ومقالات ومقابلات.' })])
   ]));
   var mark = function (kind) { return function (b, i) { var e = (kind === 'book' ? bookEl : kind === 'article' ? articleEl : videoEl)(b); e.setAttribute('data-k', kind); e.setAttribute('data-i', String(i)); return e; }; };
@@ -760,13 +698,9 @@ function chrome() {
 
 /* ================= start ================= */
 function init() {
-  setPatterns();
   /* hero */
-  $('#ringHost').appendChild(ico(ringSVG(), '', 'div'));
-  $('#frameHost').appendChild(ico(archFrameSVG(), '', 'div'));
   $('#ornHero').appendChild(ico(dividerSVG(), '', 'div'));
   $('#ornBook').appendChild(ico(dividerSVG(), '', 'div'));
-  $('#bkSeal').appendChild(ico(sealSVG(''), '', 'div'));
   $('#tagline').textContent = SITE.tagline || '';
   $('#bkTitle').textContent = BOOK_TITLE;
   $('#goLabel').textContent = 'تصفّح ' + BOOK_TITLE;

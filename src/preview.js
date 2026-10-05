@@ -3,7 +3,7 @@
    change a period's name and text, type in the "About" text and manage its photos.
    Everything is saved in this browser only (IndexedDB), never on the real website.
    This file is not part of the real site. */
-var NEWCOL = [['#E4E8F8', '#B9C4EC'], ['#F8E4EE', '#EBB5CF'], ['#E2F0E4', '#B5D8BC'], ['#FCE8D4', '#F5C79A']];
+var NEWCOL = [['#F4F4F2', '#B4B4B1']];
 var EDIT = { on: false }, newCount = 0, STORE_KEY = 'state:' + (D.sig || '0'), saveT = null, dirty = false, saveWarned = false;
 var PT = (function () { var d = document.createElement('div'); try { d.contentEditable = 'plaintext-only'; } catch (e) { return 'true'; } return d.contentEditable === 'plaintext-only' ? 'plaintext-only' : 'true'; })();
 

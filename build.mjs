@@ -22,11 +22,8 @@ const SIZES = PREVIEW
   ? { thumb: 760, thumbQ: 68, full: 0 }
   : { thumb: 800, thumbQ: 78, full: 1800, fullQ: 82 };
 
-const PALETTE = [
-  ['#DCE7F7', '#A9C0EA'], ['#F5DDE8', '#E8AFC8'], ['#FBEBC9', '#F2CC84'], ['#F8DCD3', '#F0AE9C'],
-  ['#E6DFF4', '#C5B6E8'], ['#EEF0E3', '#C9D6B2'], ['#FCE8D4', '#F5C79A'], ['#E2F0E4', '#B5D8BC'],
-  ['#E4E8F8', '#B9C4EC'], ['#F8E4EE', '#EBB5CF']
-];
+// One soft tint per period (page colour, brush-stroke colour). Quiet, warm, no strong colours.
+const PALETTE = Array.from({ length: 10 }, () => ['#F4F4F2', '#B4B4B1']);  /* every period is plain grey now */
 
 const warn = (m) => console.warn('  ! ' + m);
 const exists = async (p) => { try { await fs.access(p); return true; } catch { return false; } };
@@ -240,7 +237,11 @@ async function main() {
       fontsCss = fontsCss.split(`url(fonts/${n})`).join(`url(data:font/woff2;base64,${b64})`);
     }
   } else {
-    await fs.cp(path.join(ROOT, 'src/fonts'), path.join(OUT, 'fonts'), { recursive: true });
+    // copy only the fonts the stylesheet really uses
+    await fs.mkdir(path.join(OUT, 'fonts'), { recursive: true });
+    for (const n of new Set([...fontsCss.matchAll(/url\(fonts\/([^)]+)\)/g)].map((m) => m[1]))) {
+      await fs.copyFile(path.join(ROOT, 'src/fonts', n), path.join(OUT, 'fonts', n));
+    }
   }
   const css = await fs.readFile(path.join(ROOT, 'src/styles.css'), 'utf8');
   const previewCss = PREVIEW ? await fs.readFile(path.join(ROOT, 'src/preview.css'), 'utf8') : '';
@@ -260,7 +261,7 @@ async function main() {
     `<meta property="og:description" content="${esc(desc)}">`,
     !PREVIEW && portrait && siteUrl ? `<meta property="og:image" content="${esc(abs('og.jpg'))}"><meta name="twitter:card" content="summary_large_image">` : '',
     !PREVIEW && siteUrl ? `<meta property="og:url" content="${esc(siteUrl + '/')}"><link rel="canonical" href="${esc(siteUrl + '/')}">` : '',
-    `<meta name="theme-color" content="#2B2F4C">`
+    `<meta name="theme-color" content="#FDFDFC">`
   ].filter(Boolean).join('\n');
 
   const noscript = '<noscript><div style="max-width:900px;margin:0 auto;padding:40px 20px;font-family:sans-serif"><h1>كلود عبيد</h1><p>' + esc(site.tagline) + '</p><p>يحتاج هذا الموقع إلى تفعيل JavaScript لعرض الكتاب التفاعلي.</p>' +

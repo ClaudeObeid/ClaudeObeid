@@ -40,7 +40,7 @@ body.edit [data-k]:hover,body.edit [data-k]:focus-visible{outline-color:var(--in
 /* About: text she can type in */
 body.edit #aboutTitle,.abody.edit{outline:2px dashed rgba(43,47,76,.4);outline-offset:6px;border-radius:6px;cursor:text}
 body.edit #aboutTitle:focus,.abody.edit:focus{outline:3px solid #3F52B5}
-.abody.edit{min-height:7em;white-space:pre-wrap;font-family:'Amiri','Noto Naskh Arabic',serif;font-size:clamp(20px,2.4vw,23px);line-height:2}
+.abody.edit{min-height:7em;white-space:pre-wrap;font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif;font-weight:300;font-size:clamp(18px,2.1vw,21px);line-height:2.1}
 .abody.edit:empty::before{content:attr(data-ph);color:var(--muted)}
 body.edit .album figure{position:relative}
 .rm{position:absolute;inset-block-start:-10px;inset-inline-start:-10px;width:44px;height:44px;border-radius:50%;border:0;background:var(--ink);color:#fff;font-size:26px;line-height:1;cursor:pointer;box-shadow:0 4px 12px rgba(24,26,46,.35);z-index:2}
