@@ -1,0 +1,306 @@
+# Pages CMS configuration (this file stays at the root of the repository).
+# Docs: https://pagescms.org/docs/configuration/
+#
+# The menus you see in Pages CMS come from here:
+#   1. The book        add / rename / reorder periods of life, and add / reorder their paintings
+#   2. Books           the books shelf
+#   3. Articles        articles written about her or by her
+#   4. Videos          interviews and programmes
+#   5. About her       the portrait, the text under «عنها», and the snapshots
+#   6. Titles & links  the book title, tagline, contact and social links
+#   7. Captions        optional words under a picture
+#   Media              every picture, in folders
+#
+# Pictures uploaded from a form are stored in media/ with a random file name, so two uploads can never
+# overwrite each other. The order that matters is the order in the form (drag a picture to move it).
+
+media:
+  input: media
+  output: /media
+  extensions: [jpg, jpeg, png, webp]
+
+content:
+
+  # ---- 1. The book: periods of life ------------------------------------------------------------
+  - name: book
+    label: "1. The book (periods and paintings)"
+    type: file
+    path: content/chapters.yml
+    format: yaml
+    operations:
+      delete: false
+    fields:
+      - name: chapters
+        label: Periods of life
+        description: "Each period is one section of the book. Drag a period to change the order. The first one comes first in the book. Click Add at the bottom for a new period."
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{index}. {title}"
+        fields:
+          - name: title
+            label: Name of the period
+            type: string
+            required: true
+          - name: intro
+            label: Few words about this period
+            type: text
+            description: "Optional. Shown on the first page of the period."
+          - name: years
+            label: Years
+            type: string
+            description: "Optional. For example: 1998 - 2004"
+          - name: paintings
+            label: Paintings
+            type: image
+            options:
+              path: media/paintings
+              multiple: true
+              rename: random
+            description: "Drop many pictures here at once, or press Upload. Drag a picture to change its place; the trash icon removes it from this period."
+          - name: snapshots
+            label: Snapshots of her (optional)
+            type: image
+            options:
+              path: media/paintings
+              multiple: true
+              rename: random
+            description: "Photos of her in this period (in the studio, at an exhibition). They appear as framed snapshots at the end of the period."
+
+  # ---- 2. Books ----------------------------------------------------------------------------------
+  - name: books
+    label: "2. Books"
+    type: file
+    path: content/books.yml
+    format: yaml
+    operations:
+      delete: false
+    fields:
+      - name: books
+        label: Books
+        description: "Click Add at the bottom for a new book. Drag to change the order."
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: sub
+            label: Publisher and year
+            type: string
+            description: "Optional"
+          - name: note
+            label: Short description
+            type: text
+            description: "Optional"
+          - name: badge
+            label: Badge
+            type: string
+            description: "Optional. For example: New 2026"
+          - name: cover
+            label: Cover picture
+            type: image
+            options:
+              path: media/books
+              rename: random
+            description: "Optional"
+          - name: url
+            label: Link
+            type: string
+            description: "Optional. The full address, starting with https://"
+          - name: link_label
+            label: Words on the link
+            type: string
+            description: "Optional. For example: Read the review"
+
+  # ---- 3. Articles -------------------------------------------------------------------------------
+  - name: articles
+    label: "3. Articles"
+    type: file
+    path: content/articles.yml
+    format: yaml
+    operations:
+      delete: false
+    fields:
+      - name: articles
+        label: Articles
+        description: "Click Add at the bottom for a new article. Drag to change the order."
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: tag
+            label: Kind
+            type: string
+            description: "Short label above the title. Write كُتب عنها for an article written about her, or بقلمها for one she wrote."
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: note
+            label: Source and date
+            type: string
+            description: "Optional. For example: Janobiyat, 21 August 2026"
+          - name: url
+            label: Link
+            type: string
+            description: "Optional. The full address, starting with https://"
+
+  # ---- 4. Videos ---------------------------------------------------------------------------------
+  - name: videos
+    label: "4. Videos"
+    type: file
+    path: content/videos.yml
+    format: yaml
+    operations:
+      delete: false
+    fields:
+      - name: videos
+        label: Videos
+        description: "Click Add at the bottom for a new video. Drag to change the order."
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: prog
+            label: Programme or channel
+            type: string
+            description: "Optional"
+          - name: dur
+            label: Duration
+            type: string
+            description: "Optional. For example: 26:02"
+          - name: note
+            label: Note
+            type: string
+            description: "Optional"
+          - name: url
+            label: Link
+            type: string
+            description: "Optional. The full address, starting with https://"
+
+  # ---- 5. About her (the «عنها» section) ---------------------------------------------------------
+  - name: about
+    label: "5. About her (عنها)"
+    type: file
+    path: content/about.yml
+    format: yaml
+    operations:
+      delete: false
+    fields:
+      - name: text
+        label: Text
+        type: text
+        description: "The text shown under «عنها». Leave an empty line between paragraphs."
+      - name: title
+        label: Section title
+        type: string
+        description: "Usually: عنها"
+      - name: album
+        label: Photos beside the text
+        type: image
+        options:
+          path: media/people/album
+          multiple: true
+          rename: random
+        description: "Drop pictures here. Drag to change the order. They are shown without any caption."
+      - name: portrait
+        label: Opening portrait
+        type: image
+        options:
+          path: media/people
+          rename: random
+        description: "The picture in the arch on the first screen of the website."
+
+  # ---- 6. Titles and links -----------------------------------------------------------------------
+  - name: site
+    label: "6. Titles and links"
+    type: file
+    path: content/site.yml
+    format: yaml
+    operations:
+      delete: false
+    fields:
+      - name: book_title
+        label: Book title
+        type: string
+        description: "The title on the cover of the book. One or two words look best."
+      - name: phrases
+        label: Calligraphy phrases
+        type: string
+        list: true
+        description: "Short phrases written in calligraphy on the decorative pages of the book. Add, remove or change them."
+      - name: tagline
+        label: Tagline
+        type: string
+        description: "The short line under her name on the first screen."
+      - name: contact_email
+        label: Contact email
+        type: string
+        description: "Leave empty to show nothing."
+      - name: instagram
+        label: Instagram link
+        type: string
+        description: "The full address, starting with https://"
+      - name: facebook
+        label: Facebook link
+        type: string
+        description: "The full address, starting with https://"
+      - name: youtube
+        label: YouTube link
+        type: string
+        description: "The full address, starting with https://"
+      - name: site_url
+        label: Website address
+        type: string
+        description: "The full address of this website, for example https://claudeobeid.com. Used for the preview picture when the link is shared."
+
+  # ---- 7. Captions (optional) --------------------------------------------------------------------
+  - name: captions
+    label: "7. Captions (optional)"
+    type: file
+    path: content/captions.yml
+    format: yaml
+    operations:
+      delete: false
+    fields:
+      - name: captions
+        label: Captions
+        description: "Optional words under a painting when it is opened large. Nothing is shown unless you add one here."
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{caption}"
+        fields:
+          - name: image
+            label: Picture
+            type: image
+            options:
+              path: media/paintings
+            required: true
+          - name: caption
+            label: Caption
+            type: text
+            required: true
+
+settings:
+  commit:
+    templates:
+      create: "Add {path} (via Pages CMS)"
+      update: "Update {path} (via Pages CMS)"
+      delete: "Remove {path} (via Pages CMS)"
+      rename: "Rename {oldPath} to {newPath} (via Pages CMS)"
