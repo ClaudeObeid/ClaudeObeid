@@ -1,0 +1,112 @@
+# The periods of life = the sections of the book, in this order.
+# Edit with Pages CMS (menu "The book") or by hand.
+chapters:
+  - title: أشخاص في الأزرق
+    intro: أشخاص صغار يقفون أمام الليل والماء، وقمر في أعلى اللوحة.
+    years: ""
+    paintings:
+      - /media/paintings/01-people-in-blue/01.jpg
+      - /media/paintings/01-people-in-blue/02.jpg
+      - /media/paintings/01-people-in-blue/03.jpg
+      - /media/paintings/01-people-in-blue/04.jpg
+      - /media/paintings/01-people-in-blue/05.jpg
+      - /media/paintings/01-people-in-blue/06.jpg
+  - title: الحركة والخط
+    intro: خطوط حمراء وزرقاء تتحرك على سطح اللوحة، وأقمار ودوائر في الظلام.
+    years: ""
+    paintings:
+      - /media/paintings/02-movement-and-line/01.jpg
+      - /media/paintings/02-movement-and-line/03.jpg
+      - /media/paintings/02-movement-and-line/04.jpg
+      - /media/paintings/02-movement-and-line/05.jpg
+      - /media/paintings/02-movement-and-line/06.jpg
+      - /media/paintings/02-movement-and-line/07.jpg
+      - /media/paintings/02-movement-and-line/08.jpg
+      - /media/paintings/02-movement-and-line/09.jpg
+    snapshots:
+      - /media/paintings/02-movement-and-line/02-photo.jpg
+  - title: ألوان دافئة
+    intro: كتل برتقالية وصفراء وسوداء، أقرب إلى البناء، وزهرة حمراء كبيرة.
+    years: ""
+    paintings:
+      - /media/paintings/03-warm-colors/01.jpg
+      - /media/paintings/03-warm-colors/02.jpg
+      - /media/paintings/03-warm-colors/03.jpg
+      - /media/paintings/03-warm-colors/04.jpg
+      - /media/paintings/03-warm-colors/05.jpg
+      - /media/paintings/03-warm-colors/06.jpg
+  - title: الحشود الحمراء
+    intro: أجساد حمراء متراصة في حشود وصفوف، تقترب من بعضها أو تبتعد.
+    years: ""
+    paintings:
+      - /media/paintings/04-red-crowds/01.jpg
+      - /media/paintings/04-red-crowds/02.jpg
+      - /media/paintings/04-red-crowds/03.jpg
+      - /media/paintings/04-red-crowds/04.jpg
+      - /media/paintings/04-red-crowds/05.jpg
+      - /media/paintings/04-red-crowds/06.jpg
+      - /media/paintings/04-red-crowds/07.jpg
+      - /media/paintings/04-red-crowds/08.jpg
+      - /media/paintings/04-red-crowds/09.jpg
+      - /media/paintings/04-red-crowds/10.jpg
+      - /media/paintings/04-red-crowds/11.jpg
+      - /media/paintings/04-red-crowds/12.jpg
+      - /media/paintings/04-red-crowds/13.jpg
+  - title: التجريد اللوني
+    intro: ضربات لون كثيفة على أرضية فاتحة، حين يصير اللون هو الموضوع.
+    years: ""
+    paintings:
+      - /media/paintings/05-color-abstraction/01.jpg
+      - /media/paintings/05-color-abstraction/02.jpg
+      - /media/paintings/05-color-abstraction/03.jpg
+      - /media/paintings/05-color-abstraction/04.jpg
+      - /media/paintings/05-color-abstraction/05.jpg
+      - /media/paintings/05-color-abstraction/06.jpg
+      - /media/paintings/05-color-abstraction/07.jpg
+      - /media/paintings/05-color-abstraction/08.jpg
+      - /media/paintings/05-color-abstraction/09.jpg
+      - /media/paintings/05-color-abstraction/10.jpg
+      - /media/paintings/05-color-abstraction/11.jpg
+      - /media/paintings/05-color-abstraction/12.jpg
+      - /media/paintings/05-color-abstraction/13.jpg
+      - /media/paintings/05-color-abstraction/14.jpg
+      - /media/paintings/05-color-abstraction/15.jpg
+      - /media/paintings/05-color-abstraction/16.jpg
+  - title: أوراق صغيرة
+    intro: أعمال أصغر على الورق، تُعلَّق في إطارات على جدار.
+    years: ""
+    paintings:
+      - /media/paintings/06-small-papers/01.jpg
+      - /media/paintings/06-small-papers/02.jpg
+      - /media/paintings/06-small-papers/03.jpg
+      - /media/paintings/06-small-papers/04.jpg
+      - /media/paintings/06-small-papers/05.jpg
+      - /media/paintings/06-small-papers/06.jpg
+      - /media/paintings/06-small-papers/07.jpg
+      - /media/paintings/06-small-papers/08.jpg
+      - /media/paintings/06-small-papers/09.jpg
+      - /media/paintings/06-small-papers/10.jpg
+      - /media/paintings/06-small-papers/11.jpg
+      - /media/paintings/06-small-papers/13.jpg
+    snapshots:
+      - /media/paintings/06-small-papers/12-photo.jpg
+      - /media/paintings/06-small-papers/14-photo.jpg
+  - title: وجوه وأشكال
+    intro: "يدٌ أخرى: وجهان قريبان من بعضهما، ورسمة صغيرة داخل إطار."
+    years: ""
+    paintings:
+      - /media/paintings/07-faces-and-forms/01.jpg
+      - /media/paintings/07-faces-and-forms/02.jpg
+  - title: لوحات بين الأنقاض
+    intro: لوحات معروضة في الهواء الطلق وسط أنقاض حيّ مهدَّم.
+    years: ""
+    paintings:
+      - /media/paintings/08-among-the-ruins/06.jpg
+    snapshots:
+      - /media/paintings/08-among-the-ruins/01-photo.jpg
+      - /media/paintings/08-among-the-ruins/02-photo.jpg
+      - /media/paintings/08-among-the-ruins/03-photo.jpg
+      - /media/paintings/08-among-the-ruins/04-photo.jpg
+      - /media/paintings/08-among-the-ruins/05-photo.jpg
+      - /media/paintings/08-among-the-ruins/07-photo.jpg
+      - /media/paintings/08-among-the-ruins/08-photo.jpg

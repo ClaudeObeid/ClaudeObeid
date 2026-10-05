@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__TITLE__</title>
+<meta name="description" content="__DESC__">
+<link rel="icon" href="__FAVICON__" type="image/svg+xml">
+__META__
+<style>
+/*__FONTS__*/
+/*__CSS__*/
+/*__PREVIEW_CSS__*/
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F3E0A4"/><stop offset=".38" stop-color="#D2AE57"/><stop offset=".62" stop-color="#9B7A2C"/><stop offset="1" stop-color="#E8CE86"/>
+    </linearGradient>
+    <clipPath id="archClip" clipPathUnits="objectBoundingBox">
+      <path d="M0,1 L0,0.40 C0,0.20 0.30,0.08 0.5,0 C0.70,0.08 1,0.20 1,0.40 L1,1 Z"/>
+    </clipPath>
+  </defs>
+  <symbol id="go" viewBox="0 0 24 24"><path d="M20 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="play" viewBox="0 0 56 56"><circle cx="28" cy="28" r="27" fill="none" stroke="currentColor" stroke-width="2"/><path d="M23 18 L39 28 L23 38 Z" fill="currentColor"/></symbol>
+</svg>
+
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<div class="prog" aria-hidden="true"><i id="prog"></i></div>
+
+<!--PREVIEW-->
+<div class="draft" id="draft" role="note">
+  <div class="wrap">
+    <span>نسخة تجريبية للعرض. أسماء المراحل مقترحة. زر «تحرير الموقع» يتيح تجربة إضافة المراحل والصور والكتب والمقالات وتعديل النصوص، وما تغيّرينه يبقى في هذا المتصفح فقط.</span>
+    <button type="button" id="draftClose" aria-label="إخفاء هذه الملاحظة">إخفاء</button>
+  </div>
+</div>
+<!--/PREVIEW-->
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="logo display" href="#top">كلود عبيد</a>
+    <nav aria-label="القائمة الرئيسية">
+      <a href="#book">الكتاب</a>
+      <a href="#words">كلماتها</a>
+      <a href="#about">عنها</a>
+    </nav>
+    <form class="srch" role="search" id="sf" autocomplete="off">
+      <label class="sr" for="q">ابحث في الموقع</label>
+      <input id="q" type="search" placeholder="ابحث عن مرحلة أو كتاب أو مقال…" autocomplete="off" aria-controls="sres" aria-expanded="false">
+      <div class="sres" id="sres" hidden></div>
+    </form>
+    <!--PREVIEW--><button type="button" class="editbtn" id="editBtn" aria-pressed="false">تحرير الموقع</button><!--/PREVIEW-->
+  </div>
+</header>
+
+<!--PREVIEW-->
+<div class="editbar" id="editbar" hidden>
+  <div class="wrap">
+    <p>وضع التحرير: أضيفي المراحل والصور من الأزرار هنا والشريط الأسود في الأسفل، واضغطي على أي كتاب أو مقال أو فيديو لتعديله، واكتبي مباشرة في نص «عنها».</p>
+    <div class="acts">
+      <button type="button" id="newPeriod">＋ مرحلة جديدة</button>
+      <button type="button" id="editPeriod">تعديل المرحلة المختارة</button>
+      <button type="button" class="quiet" id="resetAll">مسح تعديلاتي</button>
+    </div>
+  </div>
+</div>
+<!--/PREVIEW-->
+
+<nav class="rail" id="rail" aria-label="أقسام الصفحة">
+  <a href="#top" data-t="top" aria-label="البداية"><i></i><span>البداية</span></a>
+  <a href="#book" data-t="book" aria-label="الكتاب"><i></i><span>الكتاب</span></a>
+  <a href="#words" data-t="words" aria-label="كلماتها"><i></i><span>كلماتها</span></a>
+  <a href="#about" data-t="about" aria-label="عنها"><i></i><span>عنها</span></a>
+</nav>
+
+<main id="main">
+  <section class="opening" id="top" data-deep="#A9C0EA">
+    <div class="wm" aria-hidden="true">كلود عبيد</div>
+    <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+    <div class="wrap">
+      <div class="portal" id="portal">
+        <div class="ring" id="ringHost"></div>
+        <div class="arch"><img id="portrait" alt="كلود عبيد" width="900" height="600"></div>
+        <div class="frame" id="frameHost"></div>
+      </div>
+      <div class="txt">
+        <div class="eyebrow">فنانة تشكيلية · كاتبة · باحثة</div>
+        <h1 class="display">كلود عبيد</h1>
+        <div id="ornHero"></div>
+        <p class="story tag" id="tagline"></p>
+        <a class="go" href="#book"><span id="goLabel">تصفّح كتاب العمر</span><svg class="arr" aria-hidden="true"><use href="#go"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bookzone" id="book" data-deep="#C5B6E8" aria-labelledby="bkTitle">
+    <div class="wrap">
+      <div class="bookhead">
+        <div class="seal" id="bkSeal"></div>
+        <h2 class="display" id="bkTitle">كتاب العمر</h2>
+        <p id="bkSub">لكل مرحلة من العمر لوحاتها. اقلب الصفحة لتنتقل من مرحلة إلى التي تليها.</p>
+        <div id="ornBook"></div>
+      </div>
+
+      <div class="viewtabs" role="group" aria-label="طريقة العرض">
+        <button type="button" id="tabBook" aria-pressed="true">تقليب الكتاب</button>
+        <button type="button" id="tabAll" aria-pressed="false">جميع الأعمال</button>
+      </div>
+
+      <div id="bookView">
+        <div class="stagewrap" id="sw">
+          <button type="button" class="navbtn" id="navPrev" aria-label="الصفحة السابقة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+          <div class="stage" id="stage" role="group" aria-roledescription="كتاب" aria-label="كتاب لوحات كلود عبيد" tabindex="0">
+            <div class="frameboard"></div>
+            <div class="book3d" id="b3d"></div>
+            <div class="spine"><i></i></div>
+            <button type="button" class="corner next" id="cornNext" aria-label="الصفحة التالية"></button>
+            <button type="button" class="corner prev" id="cornPrev" aria-label="الصفحة السابقة"></button>
+          </div>
+          <button type="button" class="navbtn" id="navNext" aria-label="الصفحة التالية"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6"/></svg></button>
+        </div>
+        <div class="bookctl">
+          <div class="crumb" id="crumb" aria-live="polite"></div>
+          <div class="chips" id="chips" role="group" aria-label="مراحل الكتاب"></div>
+          <div class="ctlrow">
+            <div class="mob">
+              <button type="button" class="navbtn" id="mobPrev" aria-label="الصفحة السابقة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+              <button type="button" class="navbtn" id="mobNext" aria-label="الصفحة التالية"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6"/></svg></button>
+            </div>
+            <button type="button" class="snd" id="snd" aria-pressed="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="mute" d="M16.5 9.5l5 5M21.5 9.5l-5 5"/></svg>
+              <span>صوت تقليب الصفحات</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="allView" class="allworks" hidden></div>
+    </div>
+  </section>
+
+  <section class="chap words" id="words" data-deep="#C9D6B2" style="--bg:#EEF0E3"></section>
+
+  <section class="about" id="about" data-deep="#F6E2A4">
+    <div class="wrap">
+      <div class="album" id="album" aria-label="من الألبوم"></div>
+      <div class="tx" id="aboutTx"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <div><div class="display">كلود عبيد</div><div class="c">فنانة تشكيلية · كاتبة · باحثة · لبنان</div></div>
+      <div class="c" id="foot"></div>
+    </div>
+  </div>
+</footer>
+
+<!--PREVIEW-->
+<div class="addbar" id="addbar">
+  <div class="addin">
+    <label class="sr" for="gs">أضيفي الصور إلى مرحلة</label>
+    <select id="gs"></select>
+    <label class="ph"><input type="checkbox" id="gphoto"><span>لقطة شخصية</span></label>
+    <label class="addgo"><span>＋ أضيفي صورًا</span><input type="file" id="gf" accept="image/*" multiple class="sr"></label>
+  </div>
+</div>
+<dialog id="fm" aria-labelledby="fmt">
+  <form class="fmin" id="fmf" method="dialog" novalidate>
+    <h3 class="display" id="fmt"></h3>
+    <div id="fmbody"></div>
+    <div class="fmact">
+      <button type="submit" class="pri" id="fmsave">حفظ</button>
+      <button type="button" id="fmcancel">إلغاء</button>
+      <button type="button" class="danger" id="fmdel" hidden>حذف</button>
+    </div>
+  </form>
+</dialog>
+<!--/PREVIEW-->
+
+<div class="toast" aria-live="polite"><div id="toast" hidden></div></div>
+
+<dialog id="lb" aria-label="عرض اللوحة">
+  <div class="lbin" id="lbin">
+    <button type="button" class="lbbtn close" id="lbclose" aria-label="إغلاق"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    <button type="button" class="lbbtn prev" id="lbprev" aria-label="السابقة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    <figure>
+      <img id="lbimg" alt="">
+      <figcaption>
+        <div class="cap" id="lbcap"></div>
+        <div class="meta" id="lbmeta"></div>
+      </figcaption>
+    </figure>
+    <button type="button" class="lbbtn next" id="lbnext" aria-label="التالية"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6"/></svg></button>
+  </div>
+</dialog>
+
+__NOSCRIPT__
+<script type="application/json" id="data">__DATA__</script>
+<script>
+/*__JS__*/
+</script>
+</body>
+</html>

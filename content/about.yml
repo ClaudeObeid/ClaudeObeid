@@ -1,0 +1,9 @@
+# The "عنها" section: the opening portrait, the text, and the snapshots.
+portrait: /media/people/portrait.jpg
+title: عنها
+text: أستاذة جامعية وباحثة لبنانية في الفن الإسلامي وجمالية الصورة. شغلت منصب نقيبة الفنانين التشكيليين اللبنانيين، وصدرت لها كتب في الصورة والتصوير والمرأة في اللوحات الفنية.
+album:
+  - /media/people/album/01-podium.jpg
+  - /media/people/album/02-at-home.jpg
+  - /media/people/album/03-quiet-moment.jpg
+  - /media/people/album/04-scan.jpg

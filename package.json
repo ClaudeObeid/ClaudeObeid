@@ -1,0 +1,18 @@
+{
+  "name": "claude-obeid-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Archive website for Dr. Claude Obeid",
+  "scripts": {
+    "build": "node build.mjs",
+    "preview": "node build.mjs --preview"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5",
+    "yaml": "^2.5.0"
+  },
+  "engines": {
+    "node": ">=18.17"
+  }
+}
